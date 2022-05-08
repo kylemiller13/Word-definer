@@ -39,7 +39,7 @@ describe("edit a definition", { :type => :feature }) do
   it("edit a definition and return to word page") do
     word = Word.new("apple", nil)
     word.save()
-    def1 = Define.new("a red fruit", word.id, nil)
+    def1 = Definition.new("a red fruit", word.id, nil)
     def1.save()
     visit("/words/#{word.id}/definitions/#{def1.id}")
     fill_in(" ", :with => "a round fruit")
@@ -62,7 +62,7 @@ describe("delete a definition", { :type => :feature }) do
   it("delete a definition and return to word page") do
     word = Word.new("apple", nil)
     word.save()
-    def1 = Define.new("a red fruit", word.id, nil)
+    def1 = Definition.new("a red fruit", word.id, nil)
     def1.save()
     visit("/words/#{word.id}/definitions/#{def1.id}")
     click_on("Delete")
