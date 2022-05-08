@@ -1,0 +1,18 @@
+<h2>Update Your Word</h2><br>
+<form action="/editword" method="post">
+  <label for="new_word">Update Word</label>
+  <input type="hidden" name="id" value="<%=@word.id%>">
+  <input id="new_word" name="new_word" value="<%=@word.word%>" type="text" class="form-control">
+  <br>
+  <button type="submit" class="btn" style="background-color:#89CFF0">Update Word</button>
+</form>
+<br>
+<form action="/words/<%= @word.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit" class="btn" style="background-color:#89CFF0">Delete Word</button>
+</form>
+<br>
+<form action="/definition/word/<%= @word.id %>" method="post">
+  <input name="_method" type="hidden" value="get">
+  <button type="submit" class="btn" style="background-color:#89CFF0">Add Definition</button>
+</form>
