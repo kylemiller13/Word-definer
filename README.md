@@ -4,6 +4,8 @@
 
 #### This is a web application for kids to enter and view word definitions.
 
+## Technologies Used
+
 * Ruby
 * Ruby Gems: Rspec, Pry, Sinatra, Sintara-Contrib, Capybara
 * HTML
