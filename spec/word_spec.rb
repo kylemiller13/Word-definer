@@ -75,4 +75,15 @@ describe ('#Word') do
     end
   end
 
+  describe("#definitions") do
+    it("returns a word's definitions") do
+      word = Word.new("apple", nil)
+      word.save()
+      def1 = Definitions.new("pear", word.id, nil)
+      def1.save()
+      def2 = Definitions.new("orange", word.id, nil)
+      def2.save()
+      expect(word.definitions).to(eq([def1, def2]))
+    end
+  end
 end
