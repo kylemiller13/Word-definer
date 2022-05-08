@@ -1,0 +1,21 @@
+<h2>Word Definer </h2><br>
+<form action="/words" method="post">
+  <label for="new_word">Add Word</label>
+  <input id="new_word" name="new_word" type="text" class="form-control">
+  <button type="submit" class="btn" style="background-color:#89CFF0">Add Word</button>
+  <br>
+  <% if @words.any? %>
+  <ul>
+    <% @words.each do |word| %>
+      <li><a style="color:#4C3E92" href="/words/<%= word.id %>"><%= word.word %></a> </li> 
+    <% end %>
+  </ul>
+  <% else %>
+    <p>There are currently no words.</p>
+  <% end %>
+  <br>
+</form>
+
+
+
+
