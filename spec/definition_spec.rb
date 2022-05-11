@@ -4,69 +4,67 @@ require('word')
 
 describe ('#Definition') do 
   before(:each) do
-  Definition.clear()
+  Definitions.clear()
   end
 
   describe('.all') do
     it("returns an empty array when there are no definitions") do 
-      expect(Definition.all).to(eq([]))
+      expect(Definitions.all).to(eq([]))
     end
   end
 
   describe('#save') do 
     it("saves definition") do
-      definition = Definition.new("a red fruit",  nil)
+      definition = Definitions.new("a red fruit", @word.id, nil)
       definition.save
-      definition2 = Definition.new("a red fruit", nil)
-      definition2.save
-      expect(Definition.all).to(eq([definition, definition2]))
+      expect(Definitions.all).to(eq([definition]))
     end
   end
 
   describe('#==') do 
     it('returns true if two definitions are the same') do
-      definition1 = Definition.new("a red fruit", nil)
-      definition2 = Definition.new("a red fruit", nil)
+      definition1 = Definitions.new("a red fruit", nil)
+      definition2 = Definitions.new("a red fruit", nil)
     expect(definition1).to(eq(definition))
     end
   end
 
   describe(".all") do
     it("returns an array of definitions") do
-      def1 = Definition.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @wordid, nil)
       def1.save()
-      def2 = Definition.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @wordid, nil)
       def2.save()
-      expect(Definition.all).to(eq([def1, def2]))
+      expect(Definitions.all).to(eq([def1, def2]))
     end
   end
 
   describe(".clear") do
     it("clears all definitions") do
-      def1 = Definition.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @wordid, nil)
       def1.save()
-      def2 = Definition.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @wordid, nil)
       def2.save()
-      Definition.clear()
-      expect(Definition.all).to(eq([]))
+      Definitions.clear()
+      expect(Definitions.all).to(eq([]))
     end
   end
 
   describe("#save") do
     it("saves a definition") do
-      def1 = Definition.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @wordid, nil)
       def1.save()
-      expect(Definition.all).to(eq([def1]))
+      expect(Definitions.all).to(eq([def1]))
     end
   end
 
   describe(".find") do
     it("finds a definition by id") do
-      def1 = Definition.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @wordid, nil)
       def1.save()
-      def2 = Definition.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @wordid, nil)
       def2.save()
-      expect(Definition.find(def1.id)).to(eq(def1))
+      expect(Definitions.find(def1.id)).to(eq(def1))
     end
   end
 
