@@ -48,10 +48,4 @@ class Definitions
     end
     definitions
   end
- 
-
-
-  # def self.find_by_word(word_id)
-  #   Word.find(word_id)
-  # end
 end
