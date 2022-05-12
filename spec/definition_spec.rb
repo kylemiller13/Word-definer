@@ -32,9 +32,9 @@ describe ('#Definition') do
 
   describe(".all") do
     it("returns an array of definitions") do
-      def1 = Definitions.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @word.id, nil)
       def1.save()
-      def2 = Definitions.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @word.id, nil)
       def2.save()
       expect(Definitions.all).to(eq([def1, def2]))
     end
@@ -42,9 +42,9 @@ describe ('#Definition') do
 
   describe(".clear") do
     it("clears all definitions") do
-      def1 = Definitions.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @word.id, nil)
       def1.save()
-      def2 = Definitions.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @word.id, nil)
       def2.save()
       Definitions.clear()
       expect(Definitions.all).to(eq([]))
@@ -53,9 +53,9 @@ describe ('#Definition') do
 
   describe(".find") do
     it("finds a definition by id") do
-      def1 = Definitions.new("a red fruit", @wordid, nil)
+      def1 = Definitions.new("a red fruit", @word.id, nil)
       def1.save()
-      def2 = Definitions.new("a yellow fruit", @wordid, nil)
+      def2 = Definitions.new("a yellow fruit", @word.id, nil)
       def2.save()
       expect(Definitions.find(def1.id)).to(eq(def1))
     end
