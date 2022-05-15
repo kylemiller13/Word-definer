@@ -20,7 +20,7 @@ describe("create a definition path", { :type => :feature }) do
     visit("/words/#{word.id}")
     fill_in("new_definition", :with => "a red fruit")
     click_on("Add")
-    expect(page).to(have_content("homie"))
+    expect(page).to(have_content("a red fruit"))
   end
 end
 
@@ -39,10 +39,11 @@ describe("edit a definition", { :type => :feature }) do
   it("edit a definition and return to word page") do
     word = Word.new("apple", nil)
     word.save()
-    def1 = Definition.new("a red fruit", word.id, nil)
+    def1 = Definitions.new("a red fruit", word.id, nil)
     def1.save()
     visit("/words/#{word.id}/definitions/#{def1.id}")
-    fill_in(" ", :with => "a round fruit")
+    # visit("/definitions/word/#{word.id}/update/#{def1.id}")
+    fill_in("definition", :with => "a round fruit")
     click_on("Update")
     expect(page).to(have_content("a round fruit"))
   end
@@ -62,7 +63,7 @@ describe("delete a definition", { :type => :feature }) do
   it("delete a definition and return to word page") do
     word = Word.new("apple", nil)
     word.save()
-    def1 = Definition.new("a red fruit", word.id, nil)
+    def1 = Definitions.new("a red fruit", word.id, nil)
     def1.save()
     visit("/words/#{word.id}/definitions/#{def1.id}")
     click_on("Delete")
