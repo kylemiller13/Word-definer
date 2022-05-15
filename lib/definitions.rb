@@ -48,4 +48,13 @@ class Definitions
     end
     definitions
   end
+  def self.find_by_defid(def_id)
+    founddefinition = ""
+    @@definitions.values.each do |definition|
+      if definition.id == def_id
+        founddefinition = definition
+      end
+    end
+    founddefinition
+  end
 end
