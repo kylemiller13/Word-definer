@@ -1,18 +1,41 @@
-<h2> <%= @word.word %></span></h2><br>
+<h2> <%= @word.word %></h2>
+<br>
+<% if @definitions.any? %>
+  <table class="table">
+    <thead >
+      <tr class="thead-dark">
+        <th scope="col">Definition</th>
+        <th scope="col">Update Definition</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <% @definitions.each do |definition| %>
+      <tr>
+      <td><a style="color:#4C3E92" href="/words/<%= definition.id %>"><%= definition.definition %></a> </td> 
+      <td>
+        <form action="/definition/word/<%= @word.id %>/update/<%= definition.id %>" method="post">
+          <input id="new_definition" name="new_definition" type="text" class="form-control">
+          <input type="hidden" name=defid value="<%= definition.id %>">
+          <button type="submit" class="btn" style="background-color:#89CFF0">Update Definition</button>
+        </form>
+      </td>
+      <td>
+        <form action="/definition/word/<%=  @word.id %>/Delete/<%= definition.id %>" method="post">
+          <input name="_method" type="hidden" value="delete">
+          <button type="submit" class="btn" style="background-color:#89CFF0">Delete</button>
+        </form>
+      </td>
+      </tr>
+    <% end %>
+    </table>
 
 <form action="/definition/word/<%= @word.id %>" method="post">
-  <label for="new_definition">Edit Definition:</label>
+  <label for="new_definition">Add Definition</label>
   <input id="new_definition" name="new_definition" type="text" class="form-control">
-  <br>
-  <button type="submit" class="btn" style="background-color:#89CFF0">Update Definition</button>
+  <input name="_method" type="hidden" value="get">
+  <button type="submit" class="btn" style="background-color:#89CFF0">Add Definition</button>
 </form>
 
-
-<% if @definitions.any? %>
-<form action="/words/<%=  @word.id %>/definitions/<%= @definitions.id %>" method="post">
-  <input word="_method" type="hidden" value="delete">
-  <button type="submit" class="btn btn-danger">Delete Definition</button>
-</form>
 <% else %>
   <p>There are currently no definitions to display.</p>
 <% end %>
