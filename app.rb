@@ -24,7 +24,6 @@ post('/words') do
   newwords = Word.new(word, nil)
   newwords.save
   redirect to('/words')
-
 end
 
 post('/editword') do
@@ -49,17 +48,36 @@ delete('/words/:id') do
 end
 
 get('/definition/word/:id') do
-  @word = Word.find(params[:id].to_i)
-  @definitions = Definitions.find_by_wordid(@word.id)
+  @wordid = params[:id].to_i
+  @word = Word.find(@wordid)
+  
+  new_definition = params[:new_definition]
+  if new_definition != nil
+    newdefinition = Definitions.new(new_definition, @word.id, nil)
+    newdefinition.save
+  end
+  @definitions = Definitions.find_by_word(@wordid)
   erb(:definition)
 end
 
-post('/definition/word/:id') do
+post('/definition/word/:id/update/:defid') do
   @wordid = params[:id].to_i
+  @defid = params[:defid].to_i
   @word = Word.find(@wordid)
+  @definition = Definitions.find_by_defid(@defid)
   new_definition = params[:new_definition]
-  newdefinition = Definitions.new(new_definition, @wordid, nil)
-  newdefinition.save
-  @definitions = Definitions.find_by_wordid(@word.id)
-  erb(:definition)
+  @definition.update(new_definition)
+  @definition.save
+  @definitions = Definitions.find_by_word(@word.id)
+  @redirectPath = '/definition/word/'+ params[:id]
+  redirect to(@redirectPath)
+end
+
+delete ('/definition/word/:id/Delete/:defid') do
+  @definition = Definitions.find(params[:defid].to_i())
+  @definition.delete()
+  @word = Word.find(params[:id].to_i())
+  @redirectPath = '/definition/word/'+ params[:id]
+
+  redirect to(@redirectPath)
 end
