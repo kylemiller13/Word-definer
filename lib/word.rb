@@ -38,10 +38,8 @@ class Word
     @@words= {}
     @@total_rows = 0
   end
-  def self.GetAll
-    @@words.all
-  end
-  def definitions
-    Definition.find_word(self.id)
+
+  def definitions()
+    Definitions.find_by_word(self.id)
   end
 end
