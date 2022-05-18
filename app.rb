@@ -4,6 +4,9 @@ require('./lib/word')
 require('./lib/definitions')
 require('pry')
 also_reload('lib/**/*.rb')
+Pry.config.input = STDIN
+Pry.config.output = STDOUT
+
 
 get('/') do
   @words = Word.all
@@ -61,11 +64,12 @@ get('/definition/word/:id') do
 end
 
 post('/definition/word/:id/update/:defid') do
+  # binding.pry
   @wordid = params[:id].to_i
   @defid = params[:defid].to_i
   @word = Word.find(@wordid)
   @definition = Definitions.find_by_defid(@defid)
-  new_definition = params[:new_definition]
+  new_definition = params[:update_definition]
   @definition.update(new_definition)
   @definition.save
   @definitions = Definitions.find_by_word(@word.id)
@@ -73,11 +77,10 @@ post('/definition/word/:id/update/:defid') do
   redirect to(@redirectPath)
 end
 
-delete ('/definition/word/:id/Delete/:defid') do
+delete('/definition/word/:id/Delete/:defid') do
   @definition = Definitions.find(params[:defid].to_i())
   @definition.delete()
   @word = Word.find(params[:id].to_i())
   @redirectPath = '/definition/word/'+ params[:id]
-
   redirect to(@redirectPath)
 end
